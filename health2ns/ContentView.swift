@@ -1,29 +1,34 @@
 import SwiftUI
-import HealthKit
 
 struct ContentView: View {
-    @State private var statusMessage = "Nyomd meg a gombot az adatok küldéséhez"
+    @StateObject private var healthManager = HealthKitManager.shared
+    @State private var showSettings = false
 
     var body: some View {
-        VStack(spacing: 20) {
-            Text(statusMessage)
-                .multilineTextAlignment(.center)
+        NavigationView {
+            VStack(spacing: 20) {
+                Text("Glükóz adatok figyelése aktív")
+                    .font(.headline)
+
+                Text(healthManager.lastUpdateMessage)
+                    .multilineTextAlignment(.center)
+                    .padding()
+
+                Button("Beállítások") {
+                    showSettings = true
+                }
                 .padding()
 
-            Button("Vércukoradatok küldése") {
-                HealthDataSender().sendLatestBloodGlucose { result in
-                    DispatchQueue.main.async {
-                        switch result {
-                        case .success(let count):
-                            statusMessage = "\(count) adat sikeresen elküldve a Nightscoutba."
-                        case .failure(let error):
-                            statusMessage = "Hiba történt: \(error.localizedDescription)"
-                        }
-                    }
-                }
+                Spacer()
             }
-            .padding()
+            .navigationTitle("Health → Nightscout")
+            .sheet(isPresented: $showSettings) {
+                SettingsView()
+            }
         }
-        .padding()
+        .onAppear {
+            // aktiváljuk a figyelést indításkor
+            _ = healthManager
+        }
     }
 }
