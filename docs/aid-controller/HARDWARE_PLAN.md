@@ -34,6 +34,16 @@ See PDF section 2 for full list with procurement links and manufacturer photos i
 | `images/oled042.jpg` | 0.42" OLED module |
 | `images/round-oled075.jpg` | Optional 0.75" round OLED |
 
+## Lifestyle renders (final model)
+
+Photorealistic concept images of the Ø35 mm pendant (AI-generated visualization):
+
+| Image | Scene |
+|-------|-------|
+| `lifestyle/aid-pendant-lifestyle-neck.png` | Worn on necklace |
+| `lifestyle/aid-pendant-lifestyle-palm.png` | Scale in palm |
+| `lifestyle/aid-pendant-lifestyle-charging.png` | Nightstand magnetic charging |
+
 ## Regenerate PDF
 
 ```bash
